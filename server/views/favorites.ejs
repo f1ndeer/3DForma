@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#000" />
+  <title>Улюблені – Форма3D</title>
+  <link rel="icon" href="/image/logo.webp" type="image/png">
+  
+  <link rel="stylesheet" href="/stylesfavorites.css" />
+</head>
+<body>
+
+  <header>
+    <div class="left-section">
+        <div class="logo">Форма3D</div>
+    </div>
+    <a href="/catalog" class="back-link">← До каталогу</a>
+  </header>
+
+  <main>
+    <h1>Мої улюблені товари</h1>
+    
+    <div id="favoritesContainer" class="product-grid">
+        <p style="text-align: center; width: 100%; margin-top: 50px;">Завантаження...</p>
+    </div>
+
+    <p id="noFavoritesMsg" style="display:none; text-align:center;">У вас ще немає улюблених товарів ☹︎</p>
+
+    <div class="total-container">
+      <h2 id="totalPrice"></h2>
+      <button id="clearFavoritesBtn" style="display:none;">Очистити улюблені</button>
+      <button id="buyAllBtn" style="display:none;">Оплатити все</button>
+    </div>
+  </main>
+
+  <footer>
+    <div id="footer" class="footer-content">
+      <p>@ Пошта: <a href="mailto:zippoziga32@gmail.com">zippoziga32@gmail.com</a></p>
+      <p>✆ Телефон: <a href="tel:0677772819">0677772819</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const container = document.getElementById('favoritesContainer');
+        const noFavMsg = document.getElementById('noFavoritesMsg');
+        const totalPriceEl = document.getElementById('totalPrice');
+        const clearBtn = document.getElementById('clearFavoritesBtn');
+
+        // 1. Отримуємо ID улюблених товарів з localStorage
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        // Якщо список порожній - показуємо повідомлення і виходимо
+        if (favorites.length === 0) {
+            container.innerHTML = '';
+            noFavMsg.style.display = 'block';
+            return;
+        }
+
+        try {
+            // 2. Відправляємо запит на сервер, щоб отримати дані про ці товари
+            // Ми передаємо список ID через POST запит
+            const response = await fetch('/get-favorites', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ids: favorites }) // Відправляємо масив ID [1, 5, 8]
+            });
+
+            const products = await response.json();
+
+            // 3. Малюємо картки товарів
+            if (products.length > 0) {
+                container.innerHTML = products.map(item => `
+                    <div class="product-card" data-id="${item.id}">
+                        <a href="/product/${item.id}" style="text-decoration: none; display: block;">
+                            <img src="/${item.img}" alt="${item.name}" onerror="this.src='/image/logo.webp'" />
+                        </a>
+                        
+                        <h3>${item.name}</h3>
+                        <p>${item.price} ГРН</p>
+                        
+                        <div class="actions">
+                            <a href="/product/${item.id}" style="text-decoration: none;">
+                                <button class="buy-btn">Купити</button>
+                            </a>
+                            <span class="star-icon active" title="Видалити з улюблених" onclick="removeFromFavorites(${item.id})">★</span>
+                        </div>
+                    </div>
+                `).join('');
+                
+                updateTotalPrice(products);
+                clearBtn.style.display = 'block';
+            } else {
+                container.innerHTML = '';
+                noFavMsg.style.display = 'block';
+            }
+
+        } catch (error) {
+            console.error('Помилка завантаження:', error);
+            container.innerHTML = '<p>Помилка завантаження даних :(</p>';
+        }
+
+        // --- ФУНКЦІЇ ---
+
+        // Функція підрахунку суми (бере дані з об'єктів, а не з HTML)
+        function updateTotalPrice(items) {
+            const total = items.reduce((sum, item) => sum + item.price, 0);
+            totalPriceEl.textContent = `Загальна вартість: ${total} ГРН`;
+        }
+        
+        // Очищення всіх улюблених
+        clearBtn.addEventListener('click', () => {
+            localStorage.removeItem('favorites');
+            location.reload(); // Перезавантажуємо сторінку
+        });
+    });
+
+    // Функція видалення одного товару (глобальна)
+    function removeFromFavorites(id) {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        // Видаляємо ID зі списку
+        favorites = favorites.filter(favId => favId.toString() !== id.toString());
+        
+        // Зберігаємо оновлений список
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        
+        // Перезавантажуємо сторінку, щоб список оновився
+        location.reload();
+    }
+  </script>
+</body>
+</html>

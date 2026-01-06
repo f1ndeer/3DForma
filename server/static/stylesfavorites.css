@@ -1,0 +1,335 @@
+/* 1. ПІДКЛЮЧЕННЯ ШРИФТІВ */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* Roboto - для основного тексту */
+  font-family: 'Roboto', sans-serif;
+  background-color: #111;
+  color: #eee;
+  margin: 0;
+  padding-top: 100px; /* врахування фіксованого хедера */
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* === HEADER === */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000;
+  padding: 12px 40px;
+  border-bottom: 2px solid red;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  gap: 30px;
+}
+
+header .left-section {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+header .logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: red;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* === MAIN CONTENT === */
+main {
+  flex: 1 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* ЗАГОЛОВКИ */
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: red;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+/* === PRODUCT GRID (СІТКА ТОВАРІВ) === */
+.product-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: auto;
+  width: 100%;
+}
+
+/* === PRODUCT CARD === */
+.product-card {
+  background-color: #222;
+  border: 2px solid red;
+  border-radius: 10px;
+  width: 250px;
+  padding: 20px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  object-fit: contain;
+  height: 180px; /* Фіксована висота картинки */
+}
+
+/* Текст в картці */
+.product-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 10px;
+  min-height: 50px; /* Фіксована висота для вирівнювання */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.product-card p {
+  font-family: 'Montserrat', sans-serif; /* Ціна виглядає краще жирним */
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #ccc;
+  font-weight: 800;
+}
+
+/* === ACTIONS (Кнопки в картці) === */
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  margin-top: auto; /* Притискає кнопки до низу */
+}
+
+/* === Оновлений стиль для зірки "Додати в обране" (як у хедері) === */
+.star-icon {
+  background-color: red;
+  color: #fff;
+  font-size: 34px;
+  border-radius: 10px;
+  width: 39px;
+  height: 39px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.7s ease, background-color 0.7s ease, box-shadow 0.7s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  padding-bottom: 3px;
+}
+
+/* Hover — той самий ефект, що в header */
+.star-icon:hover {
+  background-color: darkred;
+  transform: scale(1.1);
+}
+
+/* Активна (вже додана в улюблені) */
+.star-icon.active {
+  background-color: darkred;
+}
+
+/* Hover для активної — плавне повернення */
+.star-icon.active:hover {
+  background-color: red;
+  transform: scale(1.1);
+}
+
+
+
+/* === NO FAVORITES MESSAGE === */
+#noFavoritesMsg {
+  text-align: center; /* Центруємо повідомлення */
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 40px 0;
+  text-transform: uppercase;
+}
+
+/* === TOTAL PRICE & CLEAR BUTTON === */
+#totalPrice {
+  text-align: center;
+  margin-top: 40px;
+  color: red;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+#clearFavoritesBtn {
+  display: block;
+  margin: 20px auto 60px;
+  /* Стилі кнопки успадковуються від загального блоку нижче */
+}
+
+footer {
+    background-color: #1a1a1a; /* Темный фон как на фото */
+    color: #ffffff;
+    padding: 40px 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    
+    /* ЦЕНТРОВКА */
+    position: relative;        /* Важно для позиционирования стрелки */
+    display: flex;             /* Включаем Flexbox */
+    justify-content: center;   /* Выравниваем содержимое по горизонтали */
+    align-items: center;       /* Выравниваем по вертикали */
+    width: 100%;
+}
+
+/* Блок с текстом футера */
+.footer-content {
+    text-align: center;        /* Текст внутри блока по центру */
+    z-index: 10;               /* Чтобы текст был поверх всего */
+}
+
+.footer-content p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+/* Ссылки (Почта, Телефон, Telegram) */
+.footer-content a {
+    color: #ff0000;            /* Ярко-красный цвет ссылок */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+    color: #ff3333;
+}
+/* === BUTTONS (Unified Style) === */
+button,
+.buy-btn,
+#clearFavoritesBtn, /* ID кнопки очищення */
+.back-link,
+input[type="button"],
+input[type="submit"],
+a.btn,
+a.button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  
+  background-color: red;
+  color: #ffffff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.7s ease, background-color 0.7s ease, box-shadow 0.7s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+button:hover,
+.buy-btn:hover,
+#clearFavoritesBtn:hover,
+.back-link:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+a.btn:hover,
+a.button:hover {
+  background-color: darkred;
+  transform: scale(1.1);
+}
+
+/* Специфічне для back-link в хедері */
+.back-link {
+  white-space: nowrap;
+  font-size: 14px;
+  padding: 10px 20px;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .product-card {
+    width: 45%; /* Дві картки в ряд на планшеті */
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px;
+  }
+  .logo {
+    font-size: 24px;
+  }
+  .back-link {
+    font-size: 12px;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-card {
+    width: 100%; /* Одна картка на телефоні */
+  }
+  
+  .logo {
+    font-size: 20px;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+}

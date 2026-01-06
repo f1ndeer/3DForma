@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Улюблені – Форма3D</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      min-height: 100vh;
+      padding-top: 100px; /* для фіксованого хедера */
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #000;
+      padding: 20px 40px;
+      border-bottom: 2px solid red;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: red;
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    header a:hover {
+      color: red;
+    }
+
+    .back-link {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 600px) {
+      .back-link {
+        font-size: 24px;
+        position: relative;
+        width: 1ch;
+        overflow: hidden;
+        display: inline-block;
+      }
+
+      header {
+        padding: 15px 20px;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+      margin-bottom: 200px; /* Відстань до футера */
+    }
+
+    h1 {
+      color: red;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #bbb;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      background-color: red;
+      color: #ffffff;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .button:hover {
+      background-color: darkred;
+    }
+
+    .center-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .arrow {
+      font-size: 40px;
+      margin-top: 50px; /* Відстань між кнопкою і стрілкою */
+      animation: moveUpDown 1.5s ease-in-out infinite;
+      color: red;
+    }
+
+    @keyframes moveUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      25% {
+        transform: translateY(10px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      75% {
+        transform: translateY(10px);
+      }
+    }
+
+    footer {
+      background-color: #222;
+      color: #eee;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 16px;
+    }
+
+    .footer-content a {
+      color: red;
+      text-decoration: none;
+    }
+
+    .footer-content a:hover {
+      text-decoration: underline;
+    }
+
+    #about-us {
+      position: relative;
+    }
+
+    @media (max-width: 900px) {
+      .product-card {
+        width: 45%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .product-card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Форма3D</div>
+    <a href="index.html" class="back-link">← Повернутись до каталогу</a>
+  </header>
+
+  <main>
+    <h1>Нажаль цього товару зараз немає в наявності 😢</h1>
+    <h2>Але ми із задоволенням допоможемо підібрати щось схоже – напишіть нам!</h2>
+    
+    <div class="center-block">
+      <a href="https://t.me/zippoziga" class="button">Написати</a>
+      <div class="arrow">↓</div>
+    </div>
+  </main>
+
+  <footer>
+    <div id="footer" class="footer-content">
+      <p>@ Пошта: <a href="mailto:zippoziga32@gmail.com">zippoziga32@gmail.com</a></p>
+      <p>
+        ✆ Телефон:
+        <a href="tel:0677772819">0677772819</a>
+      </p>
+      <p>✈ Telegram: <a href="https://t.me/zippoziga">@zippoziga</a></p>
+      <p>✎ Маєш ідеї? <a href="https://forms.gle/ZAtcrnYGYUspi13p6">Залишити відгук</a></p>
+      <p>✓ Умови <a href="privacy.html">Політика конфіденційності</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000"
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Політика конфіденційності та Умови замовлення - Форма3D</title>
+  <link rel="icon" href="logo.webp" type="image/png" />
+  <link rel="stylesheet" href="stylesproduct.css" />
+</head>
+
+<body>
+  <div class="contact-overlay" id="contactOverlay" onclick="closeContact()"></div>
+  <div class="horizontal-contact" id="horizontalContact" onclick="openContact()">
+    Зв'язок
+  </div>
+  <div class="contact-bar" id="contactBar">
+    <div class="contact-content">
+      <div class="contact-header">
+        <span>Зв'язок</span>
+        <span class="close-btn" onclick="closeContact()">✖</span>
+      </div>
+      
+      <label>Email:</label>
+      <input type="email" id="email" value="deniskibzun@gmail.com" readonly />
+
+      <label>Повідомлення:</label>
+      <textarea id="message" placeholder="Введіть ваше повідомлення..."></textarea>
+      
+      <button onclick="sendMail()">Відправити</button>      
+    </div>
+  </div>
+
+  <header>
+    <div class="logo">Форма3D</div>
+    <a href="/" class="back-link">← На головну</a>
+  </header>
+  
+  <main>
+    <section class="section">
+      <div class="content-wrapper">
+        <article class="policy-content">
+          <h2>Політика конфіденційності</h2>
+          <p>Ми поважаємо вашу приватність і прагнемо захищати ваші персональні дані. Вся інформація, яку ви надаєте (наприклад, номер телефону), використовується виключно для обробки вашого замовлення і зв’язку з вами.</p>
+          <p>Ми не передаємо ваші дані третім особам без вашої згоди, за винятком випадків, передбачених законодавством.</p>
+          <p>Ви маєте право запросити видалення або зміну ваших персональних даних, звернувшись до нас.</p>
+          
+          <h2>Умови замовлення</h2>
+          <p>Перед оформленням замовлення обов’язково вкажіть:</p>
+          <ul>
+          Ваш номер телефону для зв’язку;
+          Назву товару або опис для друку (якщо замовляєте індивідуальну модель).
+          </ul>
+          <p>Натискаючи кнопку “Купити”, ви погоджуєтеся з цими умовами.</p>
+          <p>Після натискання “Купити” вас буде перенаправлено на сторінку оплати банківським переказом.</p>
+          <p>Без вказаних контактних даних та інформації про товар замовлення не буде опрацьовано.</p>
+          
+          <h2>Індивідуальні замовлення 3D друку</h2>
+          <p>Якщо ви хочете замовити друк власної 3D-моделі, надішліть STL-файл через форму на сайті або на наш email/Telegram. Ми зв’яжемося з вами для уточнення деталей, вартості та термінів друку.</p>
+
+          <h2>Оплата та доставка</h2>
+          <p>Оплата здійснюється через банківський переказ за посиланням, що відкривається після натискання кнопки “Купити”.</p>
+          <p>Доставка здійснюється службами Нової пошти або Укрпошти, а також можливий самовивіз за домовленістю.</p>
+          <p>Термін виготовлення: від 2 до 7 робочих днів залежно від складності замовлення.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div id="footer" class="footer-content">
+      <p>@ Пошта: <a href="mailto:zippoziga32@gmail.com">zippoziga32@gmail.com</a></p>
+      <p>
+        ✆ Телефон:
+        <a href="tel:0677772819">0677772819</a>
+      </p>
+      <p>✈ Telegram: <a href="https://t.me/zippoziga">@zippoziga</a></p>
+      <p>✎ Маєш ідеї? <a href="https://forms.gle/ZAtcrnYGYUspi13p6">Залишити відгук</a></p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

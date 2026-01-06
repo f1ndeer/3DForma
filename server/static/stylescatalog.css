@@ -1,0 +1,508 @@
+/* 1. ПІДКЛЮЧЕННЯ ШРИФТІВ */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* Roboto - ідеальний для читання */
+  font-family: 'Roboto', sans-serif;
+  background-color: #111;
+  color: #eee;
+  min-height: 100vh;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* === HEADER === */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000;
+  padding: 12px 40px;
+  border-bottom: 2px solid red;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  gap: 30px;
+}
+
+header .left-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+header .logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: red;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* === FAVORITES BUTTON (HEADER) === */
+/* === Favorites Button === */
+#favoritesIcon {
+  background-color: red;           /* основний фон */
+  border-radius: 10px;             /* заокруглення */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  color: #ffffff;                     /* колір зірки */
+  cursor: pointer;
+  transition: transform 0.7s ease, background-color 0.7s ease, box-shadow 0.7s ease;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Наведення */
+#favoritesIcon:hover {
+  background-color: darkred;       /* темно-червоний фон */
+  color: #fff;                     /* зірка стає білою */
+  transform: scale(1.1);
+}
+
+
+#favoritesCount {
+  position: absolute;
+  top: -3px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 1px 6px;
+  font-size: 14px;
+  display: none; /* показувати, коли >0 */
+  user-select: none;
+}
+/* === BACK LINK === */
+.back-link {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 10px;
+  background: red;
+  padding: 10px 20px;
+  transition: transform 0.7s ease, background-color 0.7s ease;
+  /* box-shadow: 0 4px 10px rgba(0,0,0,0.3); Убрал тень */
+}
+
+.back-link:hover {
+  background-color: darkred;
+  transform: scale(1.1);
+}
+
+/* Адаптив хедера */
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px;
+  }
+  .logo {
+    font-size: 24px;
+  }
+  /* На мобільному прибираємо текст "На головну", залишаємо стрілку, або зменшуємо */
+  .back-link {
+    font-size: 12px;
+    padding: 8px 15px;
+  }
+}
+
+main {
+  padding-top: 80px; /* Відступ від фіксованого хедера */
+}
+/* ПАНЕЛЬ ФІЛЬТРІВ - ЕФЕКТ СКЛА */
+.filter-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 40px auto;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+}
+
+/* СТИЛІЗАЦІЯ ІНПУТІВ ТА СЕЛЕКТІВ */
+.search-box input, .filters select {
+    background: #0f0f0f;
+    border: 2px solid #333;
+    border-radius: 12px;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.search-box input:focus, .filters select:focus {
+    border-color: #ff0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.search-box input, .filters select {
+    background: #1a1a1a;
+    color: white;
+    border: 1px solid #333;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+}
+
+.search-box input { width: 300px; }
+.filters { display: flex; gap: 10px; }
+
+.search-box input:focus { border-color: red; }
+
+@media (max-width: 768px) {
+    .filter-panel { flex-direction: column; align-items: stretch; }
+    .search-box input { width: 100%; }
+}
+.section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+/* === ТИПОГРАФІКА ЗАГОЛОВКІВ === */
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  color: red;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+}
+
+h1, h2 {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 36px;
+}
+
+h3 {
+  margin-bottom: 10px;
+  font-size: 18px; /* Розмір назви товару */
+  color: #fff; /* Назва товару біла, щоб виділятися */
+}
+
+/* === SIDE CONTACT BAR === */
+.horizontal-contact {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #333;
+  color: white;
+  padding: 100px 5px;
+  writing-mode: vertical-rl;
+  text-align: center;
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+  z-index: 1000;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.contact-bar {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 0;
+  height: auto;
+  background: #222;
+  color: white;
+  overflow: hidden;
+  border-radius: 10px 0 0 10px;
+  transition: width 0.4s;
+  z-index: 1001;
+}
+
+.contact-bar.active {
+  width: 300px;
+  padding: 20px;
+}
+
+.contact-content {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.contact-bar.active .contact-content {
+  opacity: 1;
+}
+
+.contact-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: red;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 20px;
+  color: #fff;
+}
+
+.contact-content label {
+  display: block;
+  margin: 10px 0 5px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+.contact-content input,
+.contact-content textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+.contact-content button {
+    width: 100% !important; /* Додаємо !important, щоб перебити інші правила */
+    display: block;         /* Робимо кнопку блочним елементом */
+    height: 50px;
+    margin-top: 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .horizontal-contact {
+    padding: 18px 8px;
+    font-size: 14px;
+    right: 0px;
+  }
+}
+
+.contact-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: none;
+}
+
+.contact-overlay.active {
+  display: block;
+}
+
+/* === PRODUCT GRID (КАТАЛОГ) === */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 1200px; /* Обмеження ширини контенту */
+}
+
+.product-card {
+  background-color: #222;
+  border: 2px solid red;
+  border-radius: 10px;
+  padding: 20px;
+  width: 280px; /* Трохи ширша картка */
+  text-align: center;
+  transition: transform 0.3s ease; /* Убрал box-shadow из transition */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Рівномірний розподіл контенту */
+}
+
+.product-card:hover {
+  transform: translateY(-5px); /* Легкий підйом при наведенні */
+  /* box-shadow удален здесь, чтобы не было красного свечения */
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px; /* Фіксована висота для однакових карток */
+  object-fit: cover; /* Картинка не розтягується, а обрізається */
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  /* Заголовки карток */
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: none; /* Тут можна залишити звичайний регістр */
+  line-height: 1.4;
+  height: 50px; /* Фіксована висота для назви (2 рядки) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-card p {
+  /* Ціна */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  color: red; /* Ціна червона */
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+/* === ACTIONS (Кнопка + Зірка) === */
+.actions {
+    display: flex;          /* Ставимо елементи в один рядок */
+    align-items: center;    /* Вирівнюємо їх по центру по вертикалі */
+    justify-content: center; /* Центруємо по горизонталі всередині картки */
+    gap: 10px;              /* Відступ між кнопкою та зірочкою */
+    margin-top: auto;       /* Притискає кнопки до низу картки, якщо тексту мало */
+}
+
+/* Зірка в картці товару */
+/* === Оновлений стиль для зірки "Додати в обране" (як у хедері) === */
+.star-icon {
+  background-color: red;
+  color: #fff;
+  font-size: 34px;
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.7s ease, background-color 0.7s ease, box-shadow 0.7s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  padding-bottom: 3px;
+}
+/* Hover — той самий ефект, що в header */
+.star-icon:hover {
+  background-color: darkred;
+  transform: scale(1.1);
+}
+
+/* Активна (вже додана в улюблені) */
+.star-icon.active {
+  background-color: darkred;
+}
+
+/* Hover для активної — плавне повернення */
+.star-icon.active:hover {
+  background-color: red;
+  transform: scale(1.1);
+}
+
+
+
+footer {
+    background-color: #1a1a1a; /* Темный фон как на фото */
+    color: #ffffff;
+    padding: 40px 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    
+    /* ЦЕНТРОВКА */
+    position: relative;        /* Важно для позиционирования стрелки */
+    display: flex;             /* Включаем Flexbox */
+    justify-content: center;   /* Выравниваем содержимое по горизонтали */
+    align-items: center;       /* Выравниваем по вертикали */
+    width: 100%;
+}
+
+/* Блок с текстом футера */
+.footer-content {
+    text-align: center;        /* Текст внутри блока по центру */
+    z-index: 10;               /* Чтобы текст был поверх всего */
+}
+
+.footer-content p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+/* Ссылки (Почта, Телефон, Telegram) */
+.footer-content a {
+    color: #ff0000;            /* Ярко-красный цвет ссылок */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+    color: #ff3333;
+}
+
+/* === ЄДИНИЙ СТИЛЬ ДЛЯ ВСІХ КНОПОК === */
+button,
+.buy-btn,
+input[type="button"],
+input[type="submit"],
+a.btn,
+a.button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  
+  background-color: red;
+  color: #ffffff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  /* Убрал box-shadow из transition */
+  transition: transform 0.7s ease, background-color 0.7s ease;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); Убрал тень */
+}
+
+button:hover,
+.buy-btn:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+a.btn:hover,
+a.button:hover {
+  background-color: darkred;
+  transform: scale(1.1);
+}

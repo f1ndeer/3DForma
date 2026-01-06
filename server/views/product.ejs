@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000">
+  <title><%= product.name %> - Форма3D</title>
+  <link rel="icon" href="/image/logo.webp" type="image/png">
+  <link rel="stylesheet" href="/stylesproduct.css" />
+  <style>
+    /* Стилі для кнопок замовлення */
+    .order-actions .buy-button {
+      border-radius: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      text-decoration: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Ефект "активної" кнопки при наведенні */
+    .order-actions .buy-button:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      filter: brightness(1.2);
+    }
+
+    .order-actions .buy-button:active {
+      transform: translateY(0);
+    }
+
+    /* Стиль для підказки */
+    #selectColorPrompt {
+      background: #555;
+      border: 1px dashed rgba(255, 255, 255, 0.3);
+      color: #ccc;
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contact-overlay" id="contactOverlay" onclick="closeContact()"></div>
+  <div class="horizontal-contact" id="horizontalContact" onclick="openContact()">Зв'язок</div>
+  <div class="contact-bar" id="contactBar">
+    <div class="contact-content">
+      <div class="contact-header"><span>Зв'язок</span><span class="close-btn" onclick="closeContact()">✖</span></div>
+      <label>Email:</label><input type="email" id="email" value="zippoziga32@gmail.com" readonly />
+      <label>Повідомлення:</label><textarea id="message" placeholder="Введіть ваше повідомлення..."></textarea>
+      <button onclick="sendContactEmail()">Відправити</button>      
+    </div>
+  </div>
+
+  <header>
+    <div class="logo">Форма3D</div>
+    <a href="/catalog" class="back-link">← До каталогу</a>
+  </header>
+  
+  <main>
+    <section class="section">
+      <div class="content-wrapper">
+        <div class="product-info">
+          
+          <div class="product-image">
+             <div class="carousel" id="productCarousel">
+                <button class="arrow left" id="prevBtn">&#10094;</button>
+
+                <% 
+                   let images = [];
+                   if (product.images) {
+                       try {
+                           images = JSON.parse(product.images);
+                       } catch(e) { images = [product.img]; }
+                   } else {
+                       images = [product.img];
+                   }
+                %>
+
+                <% images.forEach((imgSrc, index) => { %>
+                    <img 
+                        src="/<%= imgSrc %>" 
+                        class="<%= index === 0 ? 'active' : '' %>" 
+                        alt="<%= product.name %>"
+                        onerror="this.src='/image/logo.webp'"
+                    >
+                <% }); %>
+                
+                <button class="arrow right" id="nextBtn">&#10095;</button>
+             </div>
+          </div>
+
+          <div class="product-details">
+            <h1><%= product.name %></h1>
+            
+            <p>• Опис: <%= product.description || 'Опис скоро з\'явиться...' %></p>
+            <p>• Кому підходить: <%= product.info || 'Для всіх!' %></p>
+            
+            <p class="price-tag">Ціна: <%= product.price %> ГРН</p>
+
+            <p style="margin-bottom: 5px; margin-top: 20px;">Оберіть колір:</p>
+            
+            <div class="color-options">
+              <% 
+                 let productColors = [];
+                 if (product && product.colors) {
+                     try {
+                         productColors = JSON.parse(product.colors);
+                     } catch(e) { productColors = []; }
+                 }
+              %>
+
+              <% if (productColors.length > 0) { %>
+                  <% productColors.forEach(color => { %>
+                      <% let borderClass = (color.name === 'білий') ? 'with-border' : ''; %>
+                      <div class="color-circle <%= borderClass %>" 
+                           style="background-color: <%= color.hex %>;" 
+                           data-color="<%= color.name %>" 
+                           data-image="<%= color.img %>">
+                      </div>
+                  <% }); %>
+              <% } else { %>
+                  <p style="color: #777; font-size: 14px;">Стандартний колір</p>
+              <% } %>
+            </div>
+
+            <div id="orderActions" style="display: none; flex-direction: row; gap: 10px; margin-top: 20px;">
+                <a id="buyGmail" class="buy-button" href="javascript:void(0)" target="_blank" style="background: #d44638; flex: 1;">
+                    Gmail
+                </a>
+                <a id="buyTelegram" class="buy-button" href="javascript:void(0)" target="_blank" style="background: #0088cc; flex: 1;">
+                    Telegram
+                </a>
+            </div>
+
+            <div id="selectColorPrompt" onclick="alert('Будь ласка, спочатку оберіть колір!')">
+                Оберіть колір для замовлення
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div id="footer" class="footer-content">
+      <p>@ Пошта: <a href="mailto:zippoziga32@gmail.com">zippoziga32@gmail.com</a></p>
+      <p>✆ Телефон: <a href="tel:0677772819">0677772819</a></p>
+      <p>✈ Telegram: <a href="https://t.me/zippoziga">@zippoziga</a></p>
+      <p>✓ Умови <a href="/privacy">Політика конфіденційності</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // === 1. ЛОГІКА СЛАЙДЕРА ===
+    const carousel = document.getElementById('productCarousel');
+    const images = carousel.querySelectorAll('img');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      images.forEach((img, i) => img.classList.toggle('active', i === currentIndex));
+      if (images.length > 1) {
+          prevBtn.disabled = currentIndex === 0;
+          nextBtn.disabled = currentIndex === images.length - 1;
+      } else {
+          prevBtn.disabled = nextBtn.disabled = true;
+      }
+    }
+
+    prevBtn.addEventListener('click', () => { if (currentIndex > 0) currentIndex--; updateCarousel(); });
+    nextBtn.addEventListener('click', () => { if (currentIndex < images.length - 1) currentIndex++; updateCarousel(); });
+    updateCarousel();
+
+    // === 2. ЛОГІКА GMAIL ДЛЯ ЗВ'ЯЗКУ ===
+    function sendContactEmail() {
+        const messageInput = document.getElementById('message');
+        const messageText = messageInput.value.trim();
+
+        if (!messageText) {
+            alert("Будь ласка, введіть ваше повідомлення!");
+            return;
+        }
+
+        const recipient = "zippoziga32@gmail.com";
+        const subject = encodeURIComponent("Запитання від клієнта — Форма3D");
+        const bodyText = encodeURIComponent(
+            `Доброго дня! Мене цікавить інформація щодо послуг Форма3D.\n` +
+            `---------------------------\n` +
+            `💬 Питання:\n${messageText}\n` +
+            `---------------------------\n` +
+            `⚠️ Будь ласка, натисніть "Надіслати" у вікні пошти.`
+        );
+
+        const gmailUrl = `https://mail.google.com/mail/u/0/?fs=1&to=${recipient}&su=${subject}&body=${bodyText}&tf=cm`;
+        window.open(gmailUrl, '_blank');
+        
+        messageInput.value = ""; 
+        closeContact(); 
+    }
+
+    // === 3. ВИБІР КОЛЬОРУ ТА ГЕНЕРАЦІЯ ПОСИЛАНЬ ===
+    const circles = document.querySelectorAll('.color-circle');
+    const orderActions = document.getElementById('orderActions');
+    const selectColorPrompt = document.getElementById('selectColorPrompt');
+    const buyGmail = document.getElementById('buyGmail');
+    const buyTelegram = document.getElementById('buyTelegram');
+
+    circles.forEach(circle => {
+      circle.addEventListener('click', function() {
+        circles.forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        
+        const selectedColor = this.getAttribute('data-color');
+        const newImageSrc = this.getAttribute('data-image');
+        const productName = "<%= product.name %>";
+        const productPrice = "<%= product.price %>";
+
+        if (newImageSrc && newImageSrc !== 'undefined') {
+            const activeImg = carousel.querySelector('img.active');
+            if (activeImg) activeImg.src = newImageSrc.startsWith('/') ? newImageSrc : '/' + newImageSrc;
+        }
+        
+        // Відображаємо кнопки
+        selectColorPrompt.style.display = 'none';
+        orderActions.style.display = 'flex';
+
+        // Діловий текст замовлення (Оновлено на "товар")
+        const businessRequest = `Доброго дня! Мене зацікавив ваш товар: "${productName}".\n` +
+                                `Бажаю оформити замовлення на дану модель у кольорі: ${selectedColor}.\n` +
+                                `Ціна, вказана на сайті: ${productPrice} ГРН.\n` +
+                                `Буду вдячний за інформацію щодо термінів виготовлення та доставки.`;
+
+        // Gmail
+        buyGmail.href = `https://mail.google.com/mail/u/0/?fs=1&to=zippoziga32@gmail.com&su=${encodeURIComponent('Замовлення: ' + productName)}&body=${encodeURIComponent(businessRequest)}&tf=cm`;
+
+        // Telegram
+        buyTelegram.href = `https://t.me/zippoziga?text=${encodeURIComponent(businessRequest)}`;
+      });
+    });
+  </script>
+  <script src="/script.js"></script>
+</body>
+</html>
